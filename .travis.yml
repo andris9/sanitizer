@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 0.6
+  - 0.7
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "export SANITIZER_TEMP_DIR=/tmp" 
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 5
+
+notifications:
+  email:
+    recipients:
+      - andris@node.ee
+    on_success: change
+    on_failure: change

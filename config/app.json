@@ -1,0 +1,5 @@
+{
+    "http_port": 1337,
+    "http_ip": "127.0.0.1",
+    "tmp_dir": "/mnt/ram"
+}
