@@ -10,7 +10,7 @@ module.exports["general tests"] = {
     },
     "simple html": function(test){
         var simpleHTML = "<h1>test</h1>";
-        sanitizer.sanitize("<h1>test</h1>", function(err, data){
+        sanitizer.sanitize("<h1>test</h1><script>alert(1)</script><p>&nbsp; <span></span></p><img width=1 height=1>", function(err, data){
             test.ifError(err);
             test.ok(data);
             test.equal(data && data.body, simpleHTML);
