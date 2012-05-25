@@ -11,7 +11,6 @@ module.exports["general tests"] = {
     "simple html": function(test){
         var simpleHTML = "<h1>test</h1>";
         sanitizer.sanitize("<h1>test</h1>", function(err, data){
-            console.log(err || data)
             test.ifError(err);
             test.ok(data);
             test.equal(data && data.body, simpleHTML);
