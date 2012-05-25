@@ -32,8 +32,27 @@ page.open(phantom.args[0], function (status) {
     page.evaluate(sanitizeDOM);
 
     page.evaluate(function(){
+        
+        // find largest image
+        var image, 
+            width, height,
+            images = document.body.getElementsByTagName("p");
+        
+        for(var i=images.length-1; i>=0; i--){
+            width = (Number(images[i].width) || 0) ;
+            height = (Number(images[i].height) || 0);
+            if(width > 30 && height > 30 && (!image || width + height > image.width + image.height)){
+                image = {
+                    src: images[i].src,
+                    width: Number(images[i].width) || 0,
+                    height: Number(images[i].height) || 0
+                }
+            }
+        }
+        
         console.log(JSON.stringify({
-            body: document.body.innerHTML
+            body: document.body.innerHTML,
+            image: image
         }));
     });
     
