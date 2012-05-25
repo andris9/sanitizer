@@ -34,25 +34,31 @@ page.open(phantom.args[0], function (status) {
     page.evaluate(function(){
         
         // find largest image
-        var image, 
+        var imgarr = [],
             width, height,
-            images = document.body.getElementsByTagName("p");
+            images = document.body.getElementsByTagName("img");
         
         for(var i=images.length-1; i>=0; i--){
             width = (Number(images[i].width) || 0) ;
             height = (Number(images[i].height) || 0);
-            if(width > 30 && height > 30 && (!image || width + height > image.width + image.height)){
-                image = {
+            if(width > 30 && height > 30){
+                imgarr.push({
                     src: images[i].src,
-                    width: Number(images[i].width) || 0,
-                    height: Number(images[i].height) || 0
-                }
+                    width: width,
+                    height: height
+                });
             }
         }
         
+        imgarr.sort(function(a,b){
+            return (b.width+b.height) - (a.width+a.height);
+        });
+        
+        imgarr = imgarr.slice(0, 5); // 5 suurimat pilti
+        
         console.log(JSON.stringify({
             body: document.body.innerHTML,
-            image: image
+            images: imgarr
         }));
     });
     
