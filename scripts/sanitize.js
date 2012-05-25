@@ -133,8 +133,32 @@ function sanitizeDOM(){
         }
     }
     
-    //remove empty tags
-    var elements = element.getElementsByTagName("*");
+    //remove empty block tags
+    var elements = element.getElementsByTagName("span");
+    for(var i=elements.length-1; i>=0; i--){
+        try{
+            if(!elements[i].innerHTML.replace(/&nbsp;/gi, "").trim()){
+                elements[i].parentNode.removeChild(elements[i]);
+            }
+        }catch(E){}
+    }
+    var elements = element.getElementsByTagName("a");
+    for(var i=elements.length-1; i>=0; i--){
+        try{
+            if(!elements[i].innerHTML.replace(/&nbsp;/gi, "").trim()){
+                elements[i].parentNode.removeChild(elements[i]);
+            }
+        }catch(E){}
+    }
+    var elements = element.getElementsByTagName("p");
+    for(var i=elements.length-1; i>=0; i--){
+        try{
+            if(!elements[i].innerHTML.replace(/&nbsp;/gi, "").trim()){
+                elements[i].parentNode.removeChild(elements[i]);
+            }
+        }catch(E){}
+    }
+    var elements = element.getElementsByTagName("div");
     for(var i=elements.length-1; i>=0; i--){
         try{
             if(!elements[i].innerHTML.replace(/&nbsp;/gi, "").trim()){
